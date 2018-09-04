@@ -5,24 +5,23 @@ import com.involves.selecao.entity.Resposta;
 import com.involves.selecao.builder.AlertaBuilder;
 import com.involves.selecao.entity.Alerta;
 import com.involves.selecao.enums.PerguntaEnum;
-import com.involves.selecao.helper.MargemHelper;
+import com.involves.selecao.enums.RespostaEnum;
 
 import java.util.Optional;
 
-public class ProcessaAlertaPrecoAcimaEstipulado extends AbastractAlertaChain {
-
-    private MargemHelper margemHelper = new MargemHelper();
+public class ProcessaAlertaRupturaChain extends AbastractAlertaChain {
 
     @Override
     public Optional<Alerta> processaAlerta(Pesquisa pesquisa, Resposta resposta) {
         return new AlertaBuilder(pesquisa.getPonto_de_venda(), pesquisa.getProduto())
-                .margem(margemHelper.calculaMargemSimples(pesquisa, resposta))
-                .precoAcimaEstipulado()
+                .ruptura()
                 .build();
     }
 
     @Override
     public boolean verificaCriacaoAlerta(Pesquisa pesquisa, Resposta resposta) {
-        return PerguntaEnum.PRECO_PRODUTO.validarPergunta(resposta.getPergunta()) && pesquisa.precoEstaAcimaEstipulado(resposta);
+        return PerguntaEnum.SITUACAO_PRODUTO.validarPergunta(resposta.getPergunta())
+                && RespostaEnum.PRODUTO_AUSENTE_NA_GONDULA.validarResposta(resposta.getResposta());
     }
+
 }

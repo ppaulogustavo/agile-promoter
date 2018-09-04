@@ -12,12 +12,12 @@ public class ProcessadorAlertaChain {
     private IProcessadorAlerta processadorAlerta;
 
     public ProcessadorAlertaChain() {
-        this.processadorAlerta = new ProcessaAlertaRuptura();
+        this.processadorAlerta = new ProcessaAlertaRupturaChain();
         this.processadorAlerta
-                .setProximaValidacao(new ProcessaAlertaPrecoInferiorEstipulado())
-                .setProximaValidacao(new ProcessaAlertaPrecoAcimaEstipulado())
-                .setProximaValidacao(new ProcessaAlertaParticipacaoAcimaEstipulado())
-                .setProximaValidacao(new ProcessaAlertaParticipacaoInferiorEstipulado());
+                .setProximaValidacao(new ProcessaAlertaPrecoInferiorEstipuladoChain())
+                .setProximaValidacao(new ProcessaAlertaPrecoAcimaEstipuladoChain())
+                .setProximaValidacao(new ProcessaAlertaParticipacaoAcimaEstipuladoChain())
+                .setProximaValidacao(new ProcessaAlertaParticipacaoInferiorEstipuladoChain());
     }
 
     public Optional<Alerta> criarAlerta(Pesquisa pesquisa, Resposta resposta) {

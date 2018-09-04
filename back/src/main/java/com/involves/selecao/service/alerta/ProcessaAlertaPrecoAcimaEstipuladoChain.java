@@ -9,7 +9,7 @@ import com.involves.selecao.helper.MargemHelper;
 
 import java.util.Optional;
 
-public class ProcessaAlertaPrecoInferiorEstipulado extends AbastractAlertaChain {
+public class ProcessaAlertaPrecoAcimaEstipuladoChain extends AbastractAlertaChain {
 
     private MargemHelper margemHelper = new MargemHelper();
 
@@ -17,13 +17,12 @@ public class ProcessaAlertaPrecoInferiorEstipulado extends AbastractAlertaChain 
     public Optional<Alerta> processaAlerta(Pesquisa pesquisa, Resposta resposta) {
         return new AlertaBuilder(pesquisa.getPonto_de_venda(), pesquisa.getProduto())
                 .margem(margemHelper.calculaMargemSimples(pesquisa, resposta))
-                .precoInferiorEstipulado()
+                .precoAcimaEstipulado()
                 .build();
     }
 
     @Override
     public boolean verificaCriacaoAlerta(Pesquisa pesquisa, Resposta resposta) {
-        return PerguntaEnum.PRECO_PRODUTO.validarPergunta(resposta.getPergunta()) && pesquisa.precoEstaAbaixoEstipulado(resposta);
+        return PerguntaEnum.PRECO_PRODUTO.validarPergunta(resposta.getPergunta()) && pesquisa.precoEstaAcimaEstipulado(resposta);
     }
-
 }

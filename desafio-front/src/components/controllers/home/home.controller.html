@@ -1,0 +1,44 @@
+<div ng-controller="HomeController">
+
+    <div class="center-filters">
+        <button class="btn" ng-class="{'active': flTipo == 'todos'}" ng-click="filterBy('todos')"> Todos</button>
+        <button class="btn" ng-class="{'active': flTipo == 1}" ng-click="filterBy(1)"> Ruptura</button>
+        <button class="btn" ng-class="{'active': flTipo == 2}" ng-click="filterBy(2)"> Preço acima</button>
+        <button class="btn" ng-class="{'active': flTipo == 3}" ng-click="filterBy(3)"> Preço inferior</button>
+        <button class="btn" ng-class="{'active': flTipo == 4}" ng-click="filterBy(4)"> Participação acima</button>
+        <button class="btn" ng-class="{'active': flTipo == 5}" ng-click="filterBy(5)"> Participação inferior</button>
+    </div>
+
+    <br>
+
+    <div class="center-filters">
+        <label>Ponto de venda:</label>
+        <select ng-model="pontoSelecionado" class="btn">
+            <option ng-value="'todos'" selected="true">Todos</option>
+            <option ng-repeat="option in pontosDeVenda track by $index" ng-value="option">{{option}}</option>
+        </select>
+    </div>
+
+    <hr>
+
+    <div id="mainbox">
+        <div class="card" ng-repeat="alerta in getAlertas(flTipo, pontoSelecionado)" ng-class="{
+                'ruptura': alerta.flTipo == 1, 
+                'preco-acima': alerta.flTipo == 2,
+                'preco-inferior': alerta.flTipo == 3,
+                'participacao-acima': alerta.flTipo == 4,
+                'participacao-inferior': alerta.flTipo == 5}">
+
+            <img src="https://cdn.icon-icons.com/icons2/822/PNG/512/alert_icon-icons.com_66469.png" alt="" />
+            <h1>{{alerta.descricao}}</h1>
+            <p>Produto: {{alerta.produto}}</p>
+            <p>Ponto de venda: {{alerta.pontoDeVenda}}</p>
+            <p ng-if="alerta.margem">Margem: {{alerta.margem}}</p>
+            <p>Registrado: {{alerta.dataRegistro}}</p>
+        </div>
+
+        <div ng-show="!getAlertas().length">
+            Nenhum alerta detectado :)
+        </div>
+    </div>
+</div>

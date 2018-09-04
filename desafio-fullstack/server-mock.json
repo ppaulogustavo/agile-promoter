@@ -1,0 +1,22 @@
+{
+  "pesquisas": [
+    {
+      "id": 1,
+      "rotulo": "Campanha de pascoa",
+      "notificante": "João",
+      "ponte_de_venda": "Angeloni Capoeiras",
+      "produto": "Ovo de pascoa Kinder 48",
+      "preco_estipulado": "100",
+      "respostas": [
+        {
+          "pergunta": "Qual a situação do produto?",
+          "resposta": "Produto ausente na gondola"
+        },
+        {
+          "pergunta": "Qual o preço do produto?",
+          "resposta": "105"
+        }
+      ]
+    }
+  ]
+}
